@@ -89,4 +89,6 @@ pub(crate) mod sealed {
         /// Finalize collection into target type.
         fn finalize(collection: &mut Self::Collection) -> Self;
     }
+
+    impl FromStreamPriv
 }
