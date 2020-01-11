@@ -10,6 +10,10 @@ use all::AllFuture;
 mod any;
 use any::AnyFuture;
 
+mod collect;
+use collect::Collect;
+pub use collect::FromStream;
+
 mod filter;
 use filter::Filter;
 
@@ -453,6 +457,15 @@ pub trait StreamExt: Stream {
         F: FnMut(Self::Item) -> bool,
     {
         AnyFuture::new(self, f)
+    }
+
+    /// TODO
+    fn collect<T>(self) -> Collect<Self, T>
+    where
+        T: FromStream<Self::Item>,
+        Self: Sized,
+    {
+        Collect::new(self)
     }
 }
 
